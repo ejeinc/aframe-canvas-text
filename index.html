@@ -12,8 +12,24 @@
 <body>
   <a-scene>
     <a-sky color="#6EBAA7"></a-sky>
+
+    <!-- Simple text -->
     <a-plane id="screen" position="0 0 -10" width="5.12" height="2.56" canvas-material="width:512; height:256" canvas-text="text: こんにちは; font: 70px メイリオ; fillStyle: #f6c; textAlign: center; shadowBlur: 10; shadowColor: #000"></a-plane>
+
+    <!-- Text can be overlayed (Please care about declaring order) -->
     <a-plane position="1 1 -5" width="1" height="0.5" canvas-material="width:256; height:128" canvas-text="text: Hello World!; font: 40px sans;"></a-plane>
+
+    <!-- Long phrase separated by space -->
+    <a-plane position="-5 0 -5" rotation="0 45 0" width="5" height="5" canvas-material="width:512; height:512" canvas-text="text: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque expedita numquam eum earum totam, placeat atque veniam, at debitis error culpa autem nulla aut molestiae alias? Nemo neque, consequuntur aperiam.; font: 40px sans; textAlign: center"></a-plane>
+
+    <!-- Long phrase not separated by space -->
+    <a-plane position="10 0 -5" rotation="0 -45 0" width="5" height="5" canvas-material="width:512; height:512" canvas-text="text: ビビジランテソンテネグロホメストーニカルマンドーレポポスくんだね？; font: 50px serif; fillStyle: #006064"></a-plane>
+
+    <!-- Text can contain new line -->
+    <a-plane position="0 5 -5" rotation="45 0 0" width="5" height="5" canvas-material="width:256; height:256" canvas-text="text: あいうえお
+かきくけこ
+さしすせそ; font: 30px serif; fillStyle: #1B5E20"></a-plane>
+
   </a-scene>
 </body>
 

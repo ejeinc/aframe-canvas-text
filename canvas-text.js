@@ -1,7 +1,7 @@
 (function (AFRAME) {
 
   /**
-   * Draw multi line text. Note that overflow in horizontal axis is not handled automatically.
+   * Draw multi line text.
    * Font size must be specified in px unit.
    */
   function drawMultiLineText(context, text) {
@@ -15,11 +15,21 @@
     let y = fontSize;
 
     text.split(/\n/).forEach(line => {
-      context.fillText(line, x, y);
-      y += fontSize;
+      while (true) {
+
+        let rest = drawAndGetRest(context, line, x, y);
+        y += fontSize;
+        if (line === rest) break;
+
+        line = rest;
+        if (!line) break;
+      }
     });
   }
 
+  /**
+   * Returns drawing text X position.
+   */
   function getDrawTextX(context) {
 
     switch (context.textAlign) {
@@ -29,6 +39,39 @@
     }
 
     throw new Error('Unknown textAlign: ' + context.textAlign);
+  }
+
+  /**
+   * Draw line. Returns rest of line if overflowed from canvas.
+   */
+  function drawAndGetRest(context, line, x, y) {
+
+    let canvasWidth = context.canvas.width;
+
+    for (let i = 1; i < line.length; ++i) {
+      let str = line.substr(0, i);
+      let size = context.measureText(str);
+
+      // Test if str will be overflowed from canvas
+      if (size.width > canvasWidth) {
+
+        // Draw until previous word or character
+        let spaceIndex = line.lastIndexOf(' ', i);
+        let endIndex = spaceIndex === -1 ? i - 1 : spaceIndex + 1;
+        let drawStr = str.substr(0, endIndex);
+
+        context.fillText(drawStr, x, y);
+
+        // Rest of line
+        return line.substr(endIndex);
+      }
+    }
+
+    // Draw all of line
+    context.fillText(line, x, y);
+
+    // and no rest of line
+    return null;
   }
 
   AFRAME.registerComponent('canvas-text', {
@@ -69,6 +112,8 @@
       }
     },
     update: function () {
+
+      // Get canvas context from canvas-material component
       let canvasMaterial = this.el.components['canvas-material'];
       let w = canvasMaterial.data.width;
       let h = canvasMaterial.data.height;
