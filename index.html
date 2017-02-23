@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>canvas-text demo</title>
+  <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/richardanaya/aframe-canvas/master/index.js"></script>
+  <script src="canvas-text.js"></script>
+</head>
+
+<body>
+  <a-scene>
+    <a-sky color="#6EBAA7"></a-sky>
+    <a-plane id="screen" position="0 0 -10" width="5.12" height="2.56" canvas-material="width:512; height:256" canvas-text="text: こんにちは; font: 70px メイリオ; fillStyle: #f6c; textAlign: center; shadowBlur: 10; shadowColor: #000"></a-plane>
+    <a-plane position="1 1 -5" width="1" height="0.5" canvas-material="width:256; height:128" canvas-text="text: Hello World!; font: 40px sans;"></a-plane>
+  </a-scene>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "canvas-text",
+  "version": "0.0.1",
+  "description": "Draw text with aframe-canvas.",
+  "devDependencies": {
+    "aframe": "^0.5.0",
+    "aframe-canvas": "^0.0.6"
+  },
+  "author": "eje inc.",
+  "license": "MIT"
+}
